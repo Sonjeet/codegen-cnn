@@ -1,0 +1,2 @@
+brew 'eigen'
+brew 'googletest'

@@ -1,0 +1,6 @@
+# cpp artefacts
+build/
+Testing/
+
+# py stuff
+venv/
