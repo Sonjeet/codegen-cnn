@@ -19,14 +19,4 @@ target_link_libraries(
     Eigen3::Eigen
 )
 
-enable_testing()
-add_executable(cnn_tests
-    HelloTest.cpp)
-
-
-target_link_libraries(
-    cnn_tests
-    GTest::gtest_main)
-
-include(GoogleTest)
-gtest_discover_tests(cnn_tests)
+add_subdirectory(test)
