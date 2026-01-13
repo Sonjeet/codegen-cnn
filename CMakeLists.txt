@@ -12,21 +12,12 @@ find_package(GTest REQUIRED)
 
 add_executable(cnn
     main.cpp
-    tensor.h)
+    Tensor.h
+    LinAlg.h)
 
 target_link_libraries(
     cnn
     Eigen3::Eigen
 )
 
-enable_testing()
-add_executable(cnn_tests
-    HelloTest.cpp)
-
-
-target_link_libraries(
-    cnn_tests
-    GTest::gtest_main)
-
-include(GoogleTest)
-gtest_discover_tests(cnn_tests)
+add_subdirectory(test)

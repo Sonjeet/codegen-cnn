@@ -14,7 +14,7 @@ C++ framework for composing a CNN via a YAML config file.
 
 #### Run executable
 ```
-./build.py -t
+./build.py -e
 ```
 
 #### Run unit tests
