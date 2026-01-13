@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <array>
-#include "tensor.h"
+#include "Tensor.h"
 
 TEST(TensorTest, InitTensor) {
     std::array<size_t, 1> arr{10};
@@ -32,11 +32,11 @@ TEST(TensorTest, FillTensor) {
     Tensor1D t(arr);
     
     for (size_t i{}; i < 10; i++) {
-        EXPECT_EQ(t[i], 0);
+        EXPECT_EQ(t(i), 0);
     }
     
     t.fill(42);
     for (size_t i{}; i < 10; i++) {
-        EXPECT_EQ(t[i], 42);
+        EXPECT_EQ(t(i), 42);
     }
 }

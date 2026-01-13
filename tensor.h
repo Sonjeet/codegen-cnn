@@ -17,7 +17,6 @@
 // template<typename T>
 // concept TensorType = std::is_floating_point_v<T>;
 
-
 // in: dims, out: tensor with dims defined
 // from shape array unpack the vals into tuple
 // construct tensor with tuple
@@ -46,12 +45,12 @@ public:
     explicit Tensor(const std::array<size_t, Dims>& shape) : shape_(shape) {
         tensor_ = pack_tensor<Dims>(shape);
         // TODO: might be able to remove, motive for having this is
-        // eigen tensor may be junk inited?
+        // eigen tensor may be junk inited otherwise - check docs?
         fill(0);
     }
 
     template<typename... Indices>
-    float& operator[](Indices... indices) {
+    float& operator()(Indices... indices) {
         return tensor_(indices...);
     }
 

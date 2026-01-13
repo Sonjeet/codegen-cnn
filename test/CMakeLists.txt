@@ -3,7 +3,8 @@ find_package(GTest REQUIRED)
 
 enable_testing()
 add_executable(cnn_tests
-    TestTensor.cpp) 
+    TestTensor.cpp
+    TestLinAlg.cpp) 
 
 target_link_libraries(
     cnn_tests

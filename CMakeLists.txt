@@ -12,7 +12,8 @@ find_package(GTest REQUIRED)
 
 add_executable(cnn
     main.cpp
-    tensor.h)
+    Tensor.h
+    LinAlg.h)
 
 target_link_libraries(
     cnn

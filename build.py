@@ -4,7 +4,7 @@ import subprocess
 import os
 import argparse
 
-# TODO: should we check to see if 3p deps exist locally - if not brew install?
+# TODO: should we add a check to see if 3p deps exist locally - if not then brew install?
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__)) 
 BUILD_DIR = os.path.join(ROOT_DIR, 'build')
@@ -28,6 +28,7 @@ if not os.path.isdir(BUILD_DIR):
 subprocess.run(['cmake', '-B', 'build', '.'])
 # compile with build files in the build dir
 
+# TODO: obvs can't clean the build and then run an executable - fix bug
 if args.clean:
     subprocess.run(['cmake', '--build', './build', '--target', 'clean'])
 else:
