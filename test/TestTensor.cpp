@@ -40,3 +40,72 @@ TEST(TensorTest, FillTensor) {
         EXPECT_EQ(t(i), 42);
     }
 }
+
+TEST(TensorTest, ZeroOperation) {
+    std::array<size_t, 2> shape{3, 3};
+    Tensor2D t(shape);
+    
+    t.fill(99.0f);
+    t.zero();
+    
+    for (size_t i = 0; i < 3; i++) {
+        for (size_t j = 0; j < 3; j++) {
+            EXPECT_FLOAT_EQ(t(i, j), 0.0f);
+        }
+    }
+}
+
+TEST(TensorTest, ElementAccess4D) {
+    std::array<size_t, 4> shape{2, 3, 4, 5};
+    Tensor4D t(shape);
+    
+    t(1, 2, 3, 4) = 42.0f;
+    EXPECT_FLOAT_EQ(t(1, 2, 3, 4), 42.0f);
+    EXPECT_FLOAT_EQ(t(0, 0, 0, 0), 0.0f);
+}
+
+TEST(TensorTest, SizeCalculation) {
+    std::array<size_t, 4> shape{2, 3, 4, 5};
+    Tensor4D t(shape);
+    
+    EXPECT_EQ(t.size(), 2 * 3 * 4 * 5);
+}
+
+TEST(TensorTest, DataPointerAccess) {
+    std::array<size_t, 1> shape{5};
+    Tensor1D t(shape);
+    
+    float* data = t.data();
+    data[0] = 1.0f;
+    data[4] = 5.0f;
+    
+    EXPECT_FLOAT_EQ(t(0), 1.0f);
+    EXPECT_FLOAT_EQ(t(4), 5.0f);
+}
+
+TEST(TensorTest, RandomNormalDistribution) {
+    std::array<size_t, 1> shape{1000};
+    Tensor1D t(shape);
+    
+    t.random_normal(0.0f, 1.0f);
+    
+    float sum = 0.0f;
+    for (size_t i = 0; i < t.size(); i++) {
+        sum += t(i);
+    }
+    float mean = sum / t.size();
+    
+    EXPECT_NEAR(mean, 0.0f, 0.2f);
+}
+
+TEST(TensorTest, ConstDataAccess) {
+    std::array<size_t, 1> shape{3};
+    Tensor1D t(shape);
+    t.fill(7.0f);
+    
+    const Tensor1D& const_ref = t;
+    const float* data = const_ref.data();
+    
+    EXPECT_FLOAT_EQ(data[0], 7.0f);
+    EXPECT_FLOAT_EQ(data[2], 7.0f);
+}

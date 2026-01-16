@@ -7,6 +7,7 @@
 #include <array>
 #include <type_traits>
 #include <tuple>
+#include <random>
 
 // TODO:
 // still debating whether it should be arithmetic
@@ -57,7 +58,12 @@ public:
     void zero() { tensor_.setZero(); }
     void fill(float val) { tensor_.setConstant(val); }
     void random_normal(float mean = 0.0f, float stddev = 1.0f) {
-        tensor_ = Eigen::Tensor<float, Dims>::Random() * stddev + mean;
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::normal_distribution<float> dist(mean, stddev);
+        for (size_t i = 0; i < size(); i++) {
+            data()[i] = dist(gen);
+        }
     }
 
     size_t size() const { return tensor_.size(); }
