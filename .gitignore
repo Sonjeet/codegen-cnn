@@ -4,3 +4,4 @@ Testing/
 
 # py stuff
 venv/
+.ipynb-checkpoints/
